@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Life Music</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--g:#1a4a1a;--gm:#2d6a2d;--gl:#3d8c3d;--cr:#f5f0e8;--cd:#e8e0d0;--go:#b8860b;--tx:#1a1a0e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--tx);overflow-x:hidden;}
+nav{background:var(--g);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo span{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cr);letter-spacing:2px;}
+.nav-links{display:flex;gap:1.5rem;}
+.nav-links a{color:var(--cd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:#fff;}
+.hero{background:var(--g);min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;}
+.hero-logo-wrap{width:180px;height:180px;background:var(--cr);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:2rem;border:4px solid var(--gl);}
+.hero-eyebrow{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--cd);margin-bottom:1rem;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,120px);color:var(--cr);line-height:.9;letter-spacing:3px;margin-bottom:1rem;}
+.hero h1 span{color:var(--go);}
+.hero-sub{font-size:16px;color:var(--cd);max-width:480px;line-height:1.6;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.btn-p{background:var(--cr);color:var(--g);padding:12px 28px;border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;transition:background .2s;}
+.btn-p:hover{background:#fff;}
+.btn-o{background:transparent;color:var(--cr);padding:12px 28px;border:1.5px solid rgba(245,240,232,.4);font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;}
+.btn-o:hover{border-color:var(--cr);}
+
+/* ARTIST SLIDESHOW */
+.artists-section{position:relative;width:100%;height:100vh;overflow:hidden;background:#111;}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;pointer-events:none;}
+.slide.active{opacity:1;pointer-events:auto;}
+.slide-bg-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.slide-canvas{width:100%;height:100%;display:block;}
+.slide-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.05) 100%);}
+.slide-name{position:absolute;bottom:90px;left:48px;}
+.slide-name h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,90px);color:rgba(255,255,255,.93);letter-spacing:3px;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,.6);}
+.slide-name p{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:4px;text-transform:uppercase;margin-top:6px;}
+.view-btn{display:inline-block;margin-top:16px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .2s;}
+.view-btn:hover{background:rgba(255,255,255,.26);}
+.section-badge{position:absolute;top:28px;left:48px;z-index:10;}
+.section-badge span{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:700;}
+.section-badge h2{font-family:'Bebas Neue',sans-serif;font-size:30px;color:rgba(255,255,255,.8);letter-spacing:2px;margin-top:2px;}
+.arrows{position:absolute;bottom:32px;right:48px;display:flex;gap:10px;z-index:10;}
+.arr{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);color:#fff;width:46px;height:46px;border-radius:2px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.arr:hover{background:rgba(255,255,255,.26);}
+.dots{position:absolute;bottom:46px;left:48px;display:flex;gap:8px;align-items:center;}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .35s;}
+.dot.active{background:#fff;width:22px;border-radius:3px;}
+.progress-bar{position:absolute;bottom:0;left:0;height:3px;background:rgba(255,255,255,.65);width:0%;transition:width linear;}
+
+section{padding:5rem 2rem;}
+.sl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gm);margin-bottom:.5rem;font-weight:700;}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);color:var(--g);letter-spacing:2px;margin-bottom:2.5rem;}
+.st.lt{color:var(--cr);} .sl.lt{color:var(--cd);}
+.con{max-width:1100px;margin:0 auto;}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(8,24,8,.9);z-index:200;align-items:center;justify-content:center;padding:2rem;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--cr);max-width:500px;width:100%;border-radius:4px;overflow:hidden;max-height:92vh;overflow-y:auto;}
+.mhead{background:var(--g);padding:2.5rem 2rem 2rem;text-align:center;position:relative;}
+.mphoto{width:110px;height:110px;border-radius:50%;margin:0 auto 1rem;border:3px solid rgba(245,240,232,.3);overflow:hidden;background:var(--gm);display:flex;align-items:center;justify-content:center;}
+.mphoto canvas,.mphoto img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;}
+.mname{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--cr);letter-spacing:2px;line-height:1;}
+.msub{font-size:11px;color:rgba(245,240,232,.5);letter-spacing:4px;text-transform:uppercase;margin-top:6px;}
+.mclose{position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(245,240,232,.6);font-size:24px;cursor:pointer;line-height:1;}
+.mclose:hover{color:var(--cr);}
+.mbody{padding:1.75rem 2rem 2rem;}
+.mbio{font-size:14px;color:#555;line-height:1.75;margin-bottom:1.5rem;}
+.mlinks-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gm);font-weight:700;margin-bottom:12px;}
+.mlinks{display:flex;flex-direction:column;gap:10px;}
+.slnk{display:flex;align-items:center;gap:14px;padding:13px 18px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;transition:opacity .2s;}
+.slnk:hover{opacity:.82;}
+.slnk.sp{background:#1DB954;color:#fff;}
+.slnk.ap{background:#fc3c44;color:#fff;}
+.slnk.am{background:#00A8E0;color:#fff;}
+.sico{width:24px;height:24px;border-radius:4px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+
+/* RELEASES */
+.rel-sec{background:var(--g);}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;}
+.rc{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;background:rgba(245,240,232,.07);border:1px solid rgba(245,240,232,.12);}
+.rc:hover .stream-overlay{opacity:1;}
+.rc:hover .rc-img-wrap{transform:scale(1.03);}
+.rc-img-outer{overflow:hidden;aspect-ratio:1;position:relative;}
+.rc-img-wrap{width:100%;height:100%;transition:transform .4s ease;display:flex;align-items:center;justify-content:center;}
+.rc-img-wrap img,.rc-img-wrap canvas{width:100%;height:100%;object-fit:cover;display:block;}
+.rc-art-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(245,240,232,.18);}
+.stream-overlay{position:absolute;inset:0;background:rgba(0,0,0,.78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;transition:opacity .3s;padding:1rem;}
+.so-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;border-radius:3px;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:.5px;transition:opacity .2s;}
+.so-btn:hover{opacity:.85;}
+.so-btn.sp{background:#1DB954;color:#fff;}
+.so-btn.ap{background:#fc3c44;color:#fff;}
+.so-btn.am{background:#00A8E0;color:#fff;}
+.so-ico{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.ri{padding:.9rem 1rem;}
+.rt{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--cr);letter-spacing:1px;line-height:1.1;}
+.rart{font-size:12px;color:rgba(245,240,232,.55);margin-top:3px;}
+.rtag{display:inline-block;margin-top:7px;font-size:10px;text-transform:uppercase;letter-spacing:1px;background:var(--go);color:#fff;padding:2px 8px;border-radius:2px;font-weight:700;}
+
+/* SHOWS */
+.shows-sec{background:var(--cd);}
+.slist{display:flex;flex-direction:column;gap:1px;}
+.sitem{background:#fff;display:flex;align-items:center;gap:1.5rem;padding:1.25rem 1.5rem;border-radius:2px;}
+.sdate{font-family:'Bebas Neue',sans-serif;text-align:center;min-width:48px;}
+.sdate .mo{font-size:12px;color:var(--gm);letter-spacing:2px;text-transform:uppercase;}
+.sdate .dy{font-size:32px;color:var(--g);line-height:1;}
+.sdiv{width:1px;height:40px;background:var(--cd);}
+.sinfo{flex:1;}
+.sart{font-weight:700;font-size:15px;color:var(--g);}
+.sven{font-size:13px;color:#777;margin-top:2px;}
+.stk{background:var(--g);color:var(--cr);padding:8px 18px;border-radius:2px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .2s;}
+.stk:hover{background:var(--gm);}
+
+/* ABOUT */
+.about-sec{background:var(--g);}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.ag p{color:var(--cd);font-size:15px;line-height:1.85;margin-bottom:1rem;}
+.alogo{display:flex;justify-content:center;}
+.aring{width:220px;height:220px;border:2px solid rgba(245,240,232,.18);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+@media(max-width:640px){.ag{grid-template-columns:1fr;}.alogo{display:none;}}
+
+footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
+.ftitle{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--cr);letter-spacing:3px;margin-bottom:1rem;}
+.flinks{display:flex;gap:1.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;}
+.flinks a{color:var(--cd);text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.flinks a:hover{color:#fff;}
+.fcopy{font-size:12px;color:rgba(245,240,232,.35);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 40 40" style="height:36px;width:36px;background:var(--cr);border-radius:50%;padding:3px;flex-shrink:0;">
+      <circle cx="20" cy="20" r="17" fill="none" stroke="#1a4a1a" stroke-width="1.5"/>
+      <text x="20" y="15" text-anchor="middle" font-family="serif" font-size="4.5" fill="#1a4a1a" font-weight="bold" letter-spacing="1">GOOD LIFE</text>
+      <path d="M13,22 Q16,16 20,14 Q24,16 27,22" fill="#1a4a1a"/>
+      <path d="M11,27 Q20,21 29,27" fill="none" stroke="#1a4a1a" stroke-width="1"/>
+      <text x="20" y="34" text-anchor="middle" font-family="serif" font-size="4.5" fill="#1a4a1a" font-weight="bold" letter-spacing="2">MUSIC</text>
+    </svg>
+    <span>Good Life Music</span>
+  </div>
+  <div class="nav-links">
+    <a href="#artists">Artists</a><a href="#releases">Releases</a><a href="#shows">Shows</a><a href="#about">About</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-logo-wrap">
+    <svg viewBox="0 0 160 160" style="width:150px;height:150px;">
+      <circle cx="80" cy="80" r="75" fill="none" stroke="#1a4a1a" stroke-width="3"/>
+      <circle cx="80" cy="80" r="66" fill="none" stroke="#2d6a2d" stroke-width="1"/>
+      <text x="80" y="30" text-anchor="middle" font-family="'Bebas Neue',serif" font-size="13" fill="#1a4a1a" letter-spacing="5">GOOD LIFE</text>
+      <path d="M48,92 Q58,64 80,57 Q102,64 112,92" fill="#1a4a1a"/>
+      <path d="M60,92 Q70,80 80,77 Q90,80 100,92" fill="#2d6a2d"/>
+      <path d="M42,110 Q80,93 118,110" fill="none" stroke="#1a4a1a" stroke-width="2"/>
+      <text x="80" y="138" text-anchor="middle" font-family="'Bebas Neue',serif" font-size="13" fill="#1a4a1a" letter-spacing="7">MUSIC</text>
+    </svg>
+  </div>
+  <p class="hero-eyebrow">Athens, GA — Independent Record Label</p>
+  <h1>Good <span>Life</span><br>Music</h1>
+  <p class="hero-sub">Built on trust, healthy artist relationships, and quality output. Making great music and real change in the industry.</p>
+  <div class="hero-btns">
+    <a href="#artists" class="btn-p">Meet Our Artists</a>
+    <a href="#releases" class="btn-o">New Releases</a>
+  </div>
+</div>
+
+<!-- ARTIST SLIDESHOW -->
+<div class="artists-section" id="artists">
+  <div class="section-badge"><span>Good Life Music</span><h2>Our Artists</h2></div>
+  <div class="slide active" id="slide-0">
+    <canvas id="canvas-sky" class="slide-canvas"></canvas>
+    <div class="slide-gradient"></div>
+    <div class="slide-name"><h2>Sky Ciela</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(1)">View Artist</button></div>
+  </div>
+  <div class="slide" id="slide-1">
+    <canvas id="canvas-aislin" class="slide-canvas"></canvas>
+    <div class="slide-gradient"></div>
+    <div class="slide-name"><h2>Aislin Ward</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(0)">View Artist</button></div>
+  </div>
+  <div class="slide" id="slide-2">
+    <canvas id="canvas-patriot" class="slide-canvas"></canvas>
+    <div class="slide-gradient"></div>
+    <div class="slide-name"><h2>Patriot McKee</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(2)">View Artist</button></div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="arrows">
+    <button class="arr" onclick="prevSlide()">&#8592;</button>
+    <button class="arr" onclick="nextSlide()">&#8594;</button>
+  </div>
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="bgClose(event)">
+  <div class="modal">
+    <div class="mhead">
+      <button class="mclose" onclick="closeModal()">&#215;</button>
+      <div class="mphoto" id="mPhoto"></div>
+      <div class="mname" id="mName"></div>
+      <div class="msub">GLM Official Artist</div>
+    </div>
+    <div class="mbody">
+      <p class="mbio" id="mBio">Bio coming soon. Check back for updates on this artist's story, upcoming releases, and more from Good Life Music.</p>
+      <div class="mlinks-label">Stream &amp; Listen</div>
+      <div class="mlinks">
+        <a class="slnk sp" id="mSpotify" href="#" target="_blank"><div class="sico">S</div>Listen on Spotify</a>
+        <a class="slnk ap" id="mApple" href="#" target="_blank"><div class="sico">&#9835;</div>Listen on Apple Music</a>
+        <a class="slnk am" id="mAmazon" href="#" target="_blank"><div class="sico">a</div>Listen on Amazon Music</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELEASES -->
+<section class="rel-sec" id="releases">
+  <div class="con">
+    <p class="sl lt">Now Streaming on All Platforms</p>
+    <h2 class="st lt">New Releases</h2>
+    <div class="rg" id="releasesGrid"></div>
+  </div>
+</section>
+
+<!-- SHOWS -->
+<section class="shows-sec" id="shows">
+  <div class="con">
+    <p class="sl">Live &amp; Upcoming</p>
+    <h2 class="st">Shows</h2>
+    <div class="slist">
+      <div class="sitem">
+        <div class="sdate"><div class="mo">Apr</div><div class="dy">24</div></div>
+        <div class="sdiv"></div>
+        <div class="sinfo"><div class="sart">The Gringos</div><div class="sven">Venue TBA — Athens, GA</div></div>
+        <a href="#" class="stk">Tickets</a>
+      </div>
+      <div class="sitem">
+        <div class="sdate"><div class="mo">May</div><div class="dy">TBA</div></div>
+        <div class="sdiv"></div>
+        <div class="sinfo"><div class="sart">Aislin Ward</div><div class="sven">Venue TBA — Athens, GA</div></div>
+        <a href="#" class="stk">Details</a>
+      </div>
+      <div class="sitem">
+        <div class="sdate"><div class="mo">Jun</div><div class="dy">TBA</div></div>
+        <div class="sdiv"></div>
+        <div class="sinfo"><div class="sart">Sky Ciela</div><div class="sven">Venue TBA — Atlanta, GA</div></div>
+        <a href="#" class="stk">Details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="con">
+    <div class="ag">
+      <div>
+        <p class="sl lt">Athens, GA</p>
+        <h2 class="st lt">About Good Life Music</h2>
+        <p>Good Life Music (GLM) is a record label based in Athens, GA. What started with a dream was founded in the hopes of becoming the most trusted brand in music.</p>
+        <p>In an environment where labels are often seen as anything but trusted, GLM focuses on healthy artist relationships and quality output. Made up of a team of UGA students, GLM understands that healthy, well-supported musicians make the best music.</p>
+        <p>Built on hard work and a mission, GLM is ready to bring great music and real change to the music industry.</p>
+        <div style="margin-top:1.5rem;"><a href="mailto:contact@goodlifemusic.com" class="btn-p" style="font-size:13px;">Contact Us</a></div>
+      </div>
+      <div class="alogo">
+        <div class="aring">
+          <svg viewBox="0 0 160 160" style="width:180px;height:180px;">
+            <circle cx="80" cy="80" r="75" fill="none" stroke="rgba(245,240,232,.2)" stroke-width="2"/>
+            <text x="80" y="30" text-anchor="middle" font-family="'Bebas Neue',serif" font-size="13" fill="var(--cr)" letter-spacing="5">GOOD LIFE</text>
+            <path d="M48,92 Q58,64 80,57 Q102,64 112,92" fill="rgba(245,240,232,.75)"/>
+            <path d="M60,92 Q70,80 80,77 Q90,80 100,92" fill="rgba(245,240,232,.5)"/>
+            <path d="M42,110 Q80,93 118,110" fill="none" stroke="rgba(245,240,232,.35)" stroke-width="2"/>
+            <text x="80" y="138" text-anchor="middle" font-family="'Bebas Neue',serif" font-size="13" fill="var(--cr)" letter-spacing="7">MUSIC</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftitle">Good Life Music</div>
+  <div class="flinks">
+    <a href="#artists">Artists</a><a href="#releases">Releases</a><a href="#shows">Shows</a><a href="#about">About</a><a href="#">Instagram</a><a href="#">TikTok</a>
+  </div>
+  <div class="fcopy">&copy; 2026 Good Life Music LLC — Athens, GA. All rights reserved.</div>
+</footer>
+
+<script>
+// ── Artist data ──────────────────────────────────────────────────────────────
+const artists = [
+  { name:"Aislin Ward", canvasId:"canvas-aislin", colors:["#3a2a1a","#6b4a2a"],
+    spotify:"https://open.spotify.com/artist/5LiQIDgBLWIuQisMI4KrpL?si=h0QrzqAoTh6LBEqYm98P9g",
+    apple:"https://music.apple.com/us/artist/aislin-ward/1886231552",
+    amazon:"https://music.amazon.com/artists/B0CVYRLTKS/aislin-ward?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" },
+  { name:"Sky Ciela", canvasId:"canvas-sky", colors:["#1a1a2a","#2a2a4a"],
+    spotify:"https://open.spotify.com/artist/1x8XaY1XmooZzeF8Flmy8l?si=VitW2l84QOaRN7AweLU4nw",
+    apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
+    amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" },
+  { name:"Patriot McKee", canvasId:"canvas-patriot", colors:["#1a1a1a","#3a3a3a"],
+    spotify:"https://open.spotify.com/artist/5NHj0q8jAY4thnaeCZ7Ogy?si=qUJ-1pq6S3SRm2BIfcmbPQ",
+    apple:"https://music.apple.com/us/artist/patriot-mckee/1205259303",
+    amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" }
+];
+
+// ── Release data ─────────────────────────────────────────────────────────────
+const WORK_COVER = '__WORK_COVER_BASE64__'; // injected below
+const releases = [
+  { title:"Work", artist:"Patriot McKee", tag:"Single", year:"2026",
+    coverImg: 'work',
+    spotify:"https://open.spotify.com/album/5znK6ktnJu4PxC6riMN83Q",
+    apple:"https://music.apple.com/us/album/work-single/1882067598",
+    amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#4a3a2a" },
+  { title:"New Release", artist:"Aislin Ward", tag:"New", year:"2026",
+    coverImg: null,
+    spotify:"https://open.spotify.com/artist/5LiQIDgBLWIuQisMI4KrpL",
+    apple:"https://music.apple.com/us/artist/aislin-ward/1886231552",
+    amazon:"https://music.amazon.com/artists/B0CVYRLTKS/aislin-ward?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#2a1a0a" },
+  { title:"New Release", artist:"Sky Ciela", tag:"New", year:"2026",
+    coverImg: null,
+    spotify:"https://open.spotify.com/artist/1x8XaY1XmooZzeF8Flmy8l",
+    apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
+    amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#0a1a2a" }
+];
+
+// ── Draw artist photo onto canvas from uploaded image data ───────────────────
+// Images were uploaded by user in this session — we use the window.userImages store
+const userImages = window._glmImages || {};
+
+function drawArtistCanvas(canvasId, imgDataUrl, fallbackColors) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const w = canvas.offsetWidth || window.innerWidth;
+  const h = canvas.offsetHeight || window.innerHeight;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  if (imgDataUrl) {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.max(w/img.width, h/img.height);
+      const iw = img.width*scale, ih = img.height*scale;
+      ctx.drawImage(img, (w-iw)/2, 0, iw, ih);
+    };
+    img.src = imgDataUrl;
+  } else {
+    const grad = ctx.createLinearGradient(0,0,w,h);
+    grad.addColorStop(0, fallbackColors[0]);
+    grad.addColorStop(1, fallbackColors[1]);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,w,h);
+    ctx.font = `bold ${Math.min(w,h)*0.4}px "Bebas Neue",serif`;
+    ctx.fillStyle = 'rgba(255,255,255,0.05)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(canvasId.replace('canvas-','').substring(0,2).toUpperCase(), w/2, h/2);
+  }
+}
+
+// Receive image data passed from parent page (when hosted)
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'glmImage') {
+    window._glmImages = window._glmImages || {};
+    window._glmImages[e.data.key] = e.data.url;
+    const a = artists.find(a => a.canvasId === 'canvas-'+e.data.key);
+    if (a) drawArtistCanvas(a.canvasId, e.data.url, a.colors);
+  }
+});
+
+function initCanvases() {
+  const imgs = window._glmImages || {};
+  artists.forEach(a => {
+    const key = a.canvasId.replace('canvas-','');
+    drawArtistCanvas(a.canvasId, imgs[key] || null, a.colors);
+  });
+}
+
+// ── Build release cards with hover streaming links ───────────────────────────
+function buildReleases() {
+  const grid = document.getElementById('releasesGrid');
+  const workSrc = window._glmCovers && window._glmCovers.work ? window._glmCovers.work : null;
+  grid.innerHTML = releases.map(r => `
+    <div class="rc">
+      <div class="rc-img-outer">
+        <div class="rc-img-wrap">
+          ${r.coverImg === 'work' && workSrc
+            ? `<img src="${workSrc}" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;"/>`
+            : r.coverImg === 'work'
+            ? `<div class="rc-art-fallback" style="background:${r.artColor};"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" id="work-cover-img" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>`
+            : `<div class="rc-art-fallback" style="background:${r.artColor};">GLM</div>`}
+        </div>
+        <div class="stream-overlay">
+          <a href="${r.spotify}" target="_blank" class="so-btn sp"><div class="so-ico">S</div>Spotify</a>
+          <a href="${r.apple}" target="_blank" class="so-btn ap"><div class="so-ico">&#9835;</div>Apple Music</a>
+          <a href="${r.amazon}" target="_blank" class="so-btn am"><div class="so-ico">a</div>Amazon Music</a>
+        </div>
+      </div>
+      <div class="ri">
+        <div class="rt">${r.title}</div>
+        <div class="rart">${r.artist} · ${r.year}</div>
+        <span class="rtag">${r.tag}</span>
+      </div>
+    </div>`).join('');
+}
+
+// ── Slideshow ────────────────────────────────────────────────────────────────
+let cur=0, total=3, timer, DURATION=5500;
+function buildDots(){
+  const d=document.getElementById('dots');
+  for(let i=0;i<total;i++){
+    const dot=document.createElement('div');
+    dot.className='dot'+(i===0?' active':'');
+    dot.onclick=()=>goTo(i); d.appendChild(dot);
+  }
+}
+function goTo(n){
+  document.getElementById('slide-'+cur).classList.remove('active');
+  document.querySelectorAll('.dot')[cur].classList.remove('active');
+  cur=((n%total)+total)%total;
+  document.getElementById('slide-'+cur).classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('active');
+  resetProgress();
+}
+function nextSlide(){goTo(cur+1);}
+function prevSlide(){goTo(cur-1);}
+function resetProgress(){
+  clearTimeout(timer);
+  const bar=document.getElementById('progressBar');
+  bar.style.transition='none'; bar.style.width='0%';
+  setTimeout(()=>{ bar.style.transition=`width ${DURATION}ms linear`; bar.style.width='100%'; },20);
+  timer=setTimeout(nextSlide,DURATION);
+}
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+function openArtist(i){
+  const a=artists[i];
+  document.getElementById('mName').textContent=a.name;
+  document.getElementById('mSpotify').href=a.spotify;
+  document.getElementById('mApple').href=a.apple;
+  document.getElementById('mAmazon').href=a.amazon;
+  // Render artist canvas thumbnail in modal
+  const ph=document.getElementById('mPhoto');
+  ph.innerHTML='';
+  const mc=document.createElement('canvas');
+  mc.style.cssText='width:110px;height:110px;border-radius:50%;display:block;';
+  ph.appendChild(mc);
+  const key=a.canvasId.replace('canvas-','');
+  const imgs=window._glmImages||{};
+  setTimeout(()=>drawArtistCanvas(a.canvasId.replace('canvas-','canvas-modal-placeholder'), imgs[key]||null, a.colors),0);
+  // Simple copy from slide canvas
+  const src=document.getElementById(a.canvasId);
+  if(src){
+    mc.width=110; mc.height=110;
+    const ctx=mc.getContext('2d');
+    ctx.drawImage(src,0,0,110,110);
+  }
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal(){document.getElementById('modalBg').classList.remove('open');}
+function bgClose(e){if(e.target===document.getElementById('modalBg'))closeModal();}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+buildDots(); resetProgress(); buildReleases(); initCanvases();
+window.addEventListener('resize', initCanvases);
+</script>
+
+<script>
+// ── Load Work cover art from uploaded image ──────────────────────────────────
+(function(){
+  // Styled placeholder backgrounds matching each artist photo's aesthetic
+  setTimeout(() => {
+    const imgs = window._glmImages || {};
+    const covers = window._glmCovers || {};
+
+    // Artist slide backgrounds
+    const slides = [
+      { id:'canvas-sky',     color:'#d8d4d0', tint:'rgba(26,74,26,0.08)' },
+      { id:'canvas-aislin',  color:'#6b5a48', tint:'rgba(26,74,26,0.1)'  },
+      { id:'canvas-patriot', color:'#c8c4be', tint:'rgba(26,74,26,0.06)' }
+    ];
+    slides.forEach(s => {
+      if (!imgs[s.id.replace('canvas-','')]) {
+        const c = document.getElementById(s.id);
+        if(c){ c.width=c.offsetWidth||window.innerWidth; c.height=c.offsetHeight||window.innerHeight;
+          const ctx=c.getContext('2d');
+          ctx.fillStyle=s.color; ctx.fillRect(0,0,c.width,c.height);
+          ctx.fillStyle=s.tint;  ctx.fillRect(0,0,c.width,c.height);
+        }
+      }
+    });
+
+    // Work cover — injected as data URL by the script below
+    if (window._workCoverDataUrl) {
+      window._glmCovers = window._glmCovers || {};
+      window._glmCovers.work = window._workCoverDataUrl;
+      buildReleases(); // rebuild grid with real cover
+    }
+  }, 200);
+})();
+</script>
+</body>
+</html>
