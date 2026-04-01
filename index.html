@@ -183,7 +183,7 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
     <div class="slide-name"><h2>Aislin Ward</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(0)">View Artist</button></div>
   </div>
   <div class="slide" id="slide-2">
-    <img src="images/Patriot_McKee_Artist_Image.JPG" class="slide-bg-img" alt="Patriot McKee">
+    <img src="images/Patriot_McKee_Artist_Image.JPG" class="slide-bg-img" alt="Patriot McKee" style="object-position:center 20%;">
     <div class="slide-gradient"></div>
     <div class="slide-name"><h2>Patriot McKee</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(2)">View Artist</button></div>
   </div>
@@ -315,13 +315,13 @@ const releases = [
     amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
     artColor:"#4a3a2a" },
   { title:"New Release", artist:"Aislin Ward", tag:"New", year:"2026",
-    coverImg: null,
+    coverImg: 'aislin',
     spotify:"https://open.spotify.com/artist/5LiQIDgBLWIuQisMI4KrpL",
     apple:"https://music.apple.com/us/artist/aislin-ward/1886231552",
     amazon:"https://music.amazon.com/artists/B0CVYRLTKS/aislin-ward?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
     artColor:"#2a1a0a" },
   { title:"New Release", artist:"Sky Ciela", tag:"New", year:"2026",
-    coverImg: null,
+    coverImg: 'sky',
     spotify:"https://open.spotify.com/artist/1x8XaY1XmooZzeF8Flmy8l",
     apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
     amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
@@ -337,6 +337,10 @@ function buildReleases() {
         <div class="rc-img-wrap">
           ${r.coverImg === 'work'
             ? `<img src="images/Patriot_McKee_Work_Cover_Art.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;"/>`
+            : r.coverImg === 'aislin'
+            ? `<img src="images/Aislin_Ward_Artist_Image.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">`
+            : r.coverImg === 'sky'
+            ? `<img src="images/Sky_Celia_Artist_Image.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">`
             : `<div class="rc-art-fallback" style="background:${r.artColor};">GLM</div>`}
         </div>
         <div class="stream-overlay">
