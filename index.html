@@ -22,10 +22,10 @@ nav{background:var(--g);padding:0 2rem;display:flex;align-items:center;justify-c
 
 .hero-sub{font-size:16px;color:var(--cd);max-width:480px;line-height:1.6;margin-bottom:2rem;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
-.btn-p{background:var(--cr);color:var(--g);padding:12px 28px;border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;transition:background .2s;}
-.btn-p:hover{background:#fff;}
-.btn-o{background:transparent;color:var(--cr);padding:12px 28px;border:1.5px solid rgba(245,240,232,.4);font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;}
-.btn-o:hover{border-color:var(--cr);}
+.btn-p{background:#1a4a1a;color:#f5f0e8;padding:12px 28px;border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;transition:background .2s;}
+.btn-p:hover{background:#2d6a2d;}
+.btn-o{background:#1a4a1a;color:#f5f0e8;padding:12px 28px;border:1.5px solid rgba(245,240,232,.4);font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border-radius:2px;text-decoration:none;transition:background .2s;}
+.btn-o:hover{background:#2d6a2d;border-color:rgba(245,240,232,.7);}
 
 /* ARTIST SLIDESHOW */
 .artists-section{position:relative;width:100%;height:100vh;overflow:hidden;background:#111;}
@@ -37,8 +37,8 @@ nav{background:var(--g);padding:0 2rem;display:flex;align-items:center;justify-c
 .slide-name{position:absolute;bottom:90px;left:48px;}
 .slide-name h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,90px);color:rgba(255,255,255,.93);letter-spacing:3px;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,.6);}
 .slide-name p{font-size:12px;color:rgba(255,255,255,.5);letter-spacing:4px;text-transform:uppercase;margin-top:6px;}
-.view-btn{display:inline-block;margin-top:16px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .2s;}
-.view-btn:hover{background:rgba(255,255,255,.26);}
+.view-btn{display:inline-block;margin-top:16px;background:rgba(26,74,26,0.7);border:1px solid rgba(26,74,26,0.9);color:#fff;padding:10px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .2s;}
+.view-btn:hover{background:rgba(26,74,26,0.9);}
 .section-badge{position:absolute;top:28px;left:48px;z-index:10;}
 .section-badge span{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:700;}
 .section-badge h2{font-family:'Bebas Neue',sans-serif;font-size:30px;color:rgba(255,255,255,.8);letter-spacing:2px;margin-top:2px;}
@@ -197,6 +197,7 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
         <a class="slnk sp" id="mSpotify" href="#" target="_blank"><div class="sico">S</div>Listen on Spotify</a>
         <a class="slnk ap" id="mApple" href="#" target="_blank"><div class="sico">&#9835;</div>Listen on Apple Music</a>
         <a class="slnk am" id="mAmazon" href="#" target="_blank"><div class="sico">a</div>Listen on Amazon Music</a>
+        <a class="slnk" id="mLatest" href="#" target="_blank" style="background:#1a4a1a;color:#f5f0e8;"><div class="sico">&#9835;</div>Latest Release</a>
       </div>
     </div>
   </div>
@@ -258,14 +259,20 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
 // ── Artist data ──────────────────────────────────────────────────────────────
 const artists = [
   { name:"Aislin Ward", img:"images/Aislin_Ward_Artist_Image.jpg",
+    bio:'Born and raised in Atlanta, 21-year-old singer-songwriter Aislin Ward has entered the music scene with her self-produced debut single "Twenty." The song explores the perspective of a woman navigating a world that refuses to mold to her; she is unapologetic and immovable. Her soulful vocals, relatable lyrics, and smooth groove are, as College Try Record Club says, "fresh and sonically progressive yet perfectly timeless, like when you know you\'ve met your best friend." Aislin Ward is excited to continue producing her music, and sharing her life through her sound.',
+    latestRelease:"https://open.spotify.com/artist/5LiQIDgBLWIuQisMI4KrpL",
     spotify:"https://open.spotify.com/artist/5LiQIDgBLWIuQisMI4KrpL?si=h0QrzqAoTh6LBEqYm98P9g",
     apple:"https://music.apple.com/us/artist/aislin-ward/1886231552",
     amazon:"https://music.amazon.com/artists/B0CVYRLTKS/aislin-ward?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" },
   { name:"Sky Ciela", img:"images/Sky_Celia_Artist_Image.jpg",
+    bio:"sky ciela is a singer-songwriter with a flair for the melancholy. From the time she learned how to write, sky has been earnestly seeking sincerity and trying to paint every complex feeling through words. Drawing from lived experiences and daydreams alike, sky's authenticity is palpable in her music. Pensive, whimsical, cheeky, sensitive, and rooted in Love, sky's lyricism pulls on heartstrings and sweeps listeners into her dream land. Wholehearted in every endeavor, sky's sound is that of a tortured poet, deeply sincere and candid. sky is an unapologetic dreamer who's just getting started!",
+    latestRelease:"https://open.spotify.com/artist/1x8XaY1XmooZzeF8Flmy8l",
     spotify:"https://open.spotify.com/artist/1x8XaY1XmooZzeF8Flmy8l?si=VitW2l84QOaRN7AweLU4nw",
     apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
     amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" },
   { name:"Patriot McKee", img:"images/Patriot_McKee_Artist_Image.JPG",
+    bio:"Patriot McKee is a Christian rapper from Atlanta, Georgia. After releasing his first album at 14, Patriot found a love for music that brings people hope through encouragement and shared experiences, from sharing testimonies to sharing vibes. Patriot moves fluidly between styles, maintaining a straightforward and lyrical approach to lyrics and delivery while exploring where different sounds and flows suit his taste. Patriot knows that he is never a finished product, nor is his music, and he invites you to join him in the development and discovery of both.",
+    latestRelease:"https://open.spotify.com/album/5znK6ktnJu4PxC6riMN83Q",
     spotify:"https://open.spotify.com/artist/5NHj0q8jAY4thnaeCZ7Ogy?si=qUJ-1pq6S3SRm2BIfcmbPQ",
     apple:"https://music.apple.com/us/artist/patriot-mckee/1205259303",
     amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" }
@@ -354,9 +361,11 @@ function resetProgress(){
 function openArtist(i){
   const a=artists[i];
   document.getElementById('mName').textContent=a.name;
+  document.getElementById('mBio').textContent=a.bio||'Bio coming soon. Check back for updates on this artist\'s story, upcoming releases, and more from Good Life Music.';
   document.getElementById('mSpotify').href=a.spotify;
   document.getElementById('mApple').href=a.apple;
   document.getElementById('mAmazon').href=a.amazon;
+  document.getElementById('mLatest').href=a.latestRelease;
   const ph=document.getElementById('mPhoto');
   ph.innerHTML=`<img src="${a.img}" alt="${a.name}" style="width:110px;height:110px;object-fit:cover;object-position:center top;border-radius:50%;display:block;">`;
   document.getElementById('modalBg').classList.add('open');
