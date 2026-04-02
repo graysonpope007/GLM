@@ -11,7 +11,10 @@
 body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--tx);overflow-x:hidden;}
 nav{background:var(--g);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:60px;}
 .nav-logo{display:flex;align-items:center;gap:10px;}
-.nav-logo span{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cr);letter-spacing:2px;}
+.nav-logo span{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cr);letter-spacing:2px;white-space:nowrap;}
+.nav-logo .full-name{display:inline;}
+.nav-logo .short-name{display:none;}
+@media(max-width:480px){.nav-logo .full-name{display:none;}.nav-logo .short-name{display:inline;}}
 .nav-links{display:flex;gap:1.5rem;}
 .nav-links a{color:var(--cd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:#fff;}
@@ -142,7 +145,8 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
 <nav>
   <div class="nav-logo">
     <img src="images/GLM_Logo.jpg" style="height:38px;width:38px;object-fit:contain;border-radius:50%;" alt="Good Life Music Logo">
-    <span>Good Life Music</span>
+    <span class="full-name">Good Life Music</span>
+    <span class="short-name">GLM</span>
   </div>
   <div class="nav-links">
     <a href="#artists">Artists</a><a href="#releases">Releases</a><a href="#shows">Shows</a><a href="#about">About</a>
