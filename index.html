@@ -180,6 +180,15 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
     <div class="slide-gradient"></div>
     <div class="slide-name"><h2>Patriot McKee</h2><p>GLM Official Artist</p><button class="view-btn" onclick="openArtist(2)">View Artist</button></div>
   </div>
+  <div class="slide" id="slide-3">
+    <img src="images/The_Wraps_Artist_Image.jpg" alt="The Wraps" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"/>
+    <div class="slide-gradient"></div>
+    <div class="slide-name">
+      <h2>The Wraps</h2>
+      <p>GLM Official Artist</p>
+      <button class="view-btn" onclick="openArtist(3)">View Artist</button>
+    </div>
+  </div>
   <div class="dots" id="dots"></div>
   <div class="arrows">
     <button class="arr" onclick="prevSlide()">&#8592;</button>
@@ -282,7 +291,13 @@ const artists = [
     latestRelease:"https://open.spotify.com/album/5znK6ktnJu4PxC6riMN83Q",
     spotify:"https://open.spotify.com/artist/5NHj0q8jAY4thnaeCZ7Ogy?si=qUJ-1pq6S3SRm2BIfcmbPQ",
     apple:"https://music.apple.com/us/artist/patriot-mckee/1205259303",
-    amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" }
+    amazon:"https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" },
+  { name:"The Wraps", img:"images/The_Wraps_Artist_Image.jpg",
+    bio:"The Wraps are a Rock and Roll band based in Athens, GA, with a sleek, sparky sound that some might call vintage. If time machines exist... they are either from 2006 or 1966 ✨🪩📸",
+    latestRelease:"https://open.spotify.com/artist/1gqHXkpFGreB4WWDk6VxSj",
+    spotify:"https://open.spotify.com/artist/1gqHXkpFGreB4WWDk6VxSj?si=h4ANlsfaQ9iNBnwAZqIN7Q",
+    apple:"https://music.apple.com/us/artist/the-wraps/1733126284",
+    amazon:"https://music.amazon.com/artists/B0CWKPSTSG/the-wraps?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" }
 ];
 
 // ── Release data ─────────────────────────────────────────────────────────────
@@ -304,7 +319,13 @@ const releases = [
     spotify:"https://open.spotify.com/track/0WuJ2PWF4qVZecYtqniey7?si=c6ad7efdfae34fc8",
     apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
     amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
-    artColor:"#0a1a2a" }
+    artColor:"#0a1a2a" },
+  { title:"I Bet", artist:"The Wraps", tag:"Album", year:"2025",
+    coverImg: null,
+    spotify:"https://open.spotify.com/artist/1gqHXkpFGreB4WWDk6VxSj?si=h4ANlsfaQ9iNBnwAZqIN7Q",
+    apple:"https://music.apple.com/us/artist/the-wraps/1733126284",
+    amazon:"https://music.amazon.com/artists/B0CWKPSTSG/the-wraps?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#1a1a2a" }
 ];
 
 // ── Build release cards with hover streaming links ───────────────────────────
@@ -337,7 +358,7 @@ function buildReleases() {
 }
 
 // ── Slideshow ────────────────────────────────────────────────────────────────
-let cur=0, total=3, timer, DURATION=5500;
+let cur=0, total=4, timer, DURATION=5500;
 function buildDots(){
   const d=document.getElementById('dots');
   for(let i=0;i<total;i++){
