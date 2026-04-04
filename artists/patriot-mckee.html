@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patriot McKee — Good Life Music LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="../images/GLM_Logo_Transparent.png">
+<style>
+:root{--g:#1a4a1a;--gm:#2d6a2d;--gl:#3d8c3d;--cr:#f5f0e8;--cd:#e8e0d0;--go:#b8860b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--cr);color:#1a1a0e;}
+nav{background:var(--g);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:60px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo img{height:38px;width:38px;object-fit:contain;}
+.nav-logo .full-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cr);letter-spacing:2px;}
+.nav-logo .short-name{display:none;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--cr);letter-spacing:2px;}
+@media(max-width:480px){.nav-logo .full-name{display:none;}.nav-logo .short-name{display:inline;}}
+.nav-links{display:flex;gap:1.5rem;}
+.nav-links a{color:var(--cd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;}
+.nav-links a:hover{color:#fff;}
+.hero{position:relative;height:90vh;overflow:hidden;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 5%;display:block;}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.1) 60%,transparent 100%);}
+.hero-info{position:absolute;bottom:48px;left:48px;}
+.hero-info p{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.hero-info h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);color:#fff;letter-spacing:3px;line-height:1;}
+@media(max-width:640px){.hero-info{left:24px;bottom:32px;}}
+.stream-bar{background:var(--g);padding:1.5rem 2rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:center;}
+.stream-btn{display:flex;align-items:center;gap:10px;padding:10px 20px;border-radius:4px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.5px;transition:opacity .2s;}
+.stream-btn:hover{opacity:.85;}
+.stream-btn.sp{background:#1DB954;color:#fff;}
+.stream-btn.ap{background:#fc3c44;color:#fff;}
+.stream-btn.am{background:#00A8E0;color:#fff;}
+.sico{width:22px;height:22px;border-radius:3px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.bio-section{max-width:800px;margin:4rem auto;padding:0 2rem;}
+.bio-section p{font-size:16px;line-height:1.85;color:#444;}
+.releases-section{background:var(--g);padding:4rem 2rem;}
+.releases-section .con{max-width:1100px;margin:0 auto;}
+.sl{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--cd);margin-bottom:.5rem;font-weight:700;}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);color:var(--cr);letter-spacing:2px;margin-bottom:2rem;}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.25rem;}
+.rc{position:relative;border-radius:4px;overflow:hidden;cursor:pointer;background:rgba(245,240,232,.07);border:1px solid rgba(245,240,232,.12);}
+.rc:hover .stream-overlay{opacity:1;}
+.rc:hover .rc-img-wrap{transform:scale(1.03);}
+.rc-img-outer{overflow:hidden;aspect-ratio:1;position:relative;}
+.rc-img-wrap{width:100%;height:100%;transition:transform .4s ease;}
+.rc-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.stream-overlay{position:absolute;inset:0;background:rgba(0,0,0,.78);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;transition:opacity .3s;padding:1rem;}
+.so-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;border-radius:3px;text-decoration:none;font-weight:700;font-size:12px;transition:opacity .2s;}
+.so-btn:hover{opacity:.85;}
+.so-btn.sp{background:#1DB954;color:#fff;}
+.so-btn.ap{background:#fc3c44;color:#fff;}
+.so-btn.am{background:#00A8E0;color:#fff;}
+.so-ico{width:20px;height:20px;border-radius:3px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.ri{padding:.9rem 1rem;}
+.rt{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--cr);letter-spacing:1px;}
+.rart{font-size:12px;color:rgba(245,240,232,.55);margin-top:3px;}
+.rtag{display:inline-block;margin-top:7px;font-size:10px;text-transform:uppercase;letter-spacing:1px;background:var(--go);color:#fff;padding:2px 8px;border-radius:2px;font-weight:700;}
+.player-section{max-width:800px;margin:4rem auto;padding:0 2rem;}
+.back-btn{display:inline-block;margin:2rem 2rem 0;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--g);text-decoration:none;text-transform:uppercase;}
+.back-btn:hover{color:var(--gm);}
+footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;margin-top:4rem;}
+.ftitle{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--cr);letter-spacing:3px;margin-bottom:1rem;}
+.flinks{display:flex;gap:1.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;}
+.flinks a{color:var(--cd);text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.flinks a:hover{color:#fff;}
+.fcopy{font-size:12px;color:rgba(245,240,232,.35);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <img src="../images/GLM_Logo.jpg" alt="Good Life Music">
+    <span class="full-name">Good Life Music</span>
+    <span class="short-name">GLM</span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html#artists">Artists</a>
+    <a href="../index.html#releases">Releases</a>
+    <a href="../index.html#shows">Shows</a>
+    <a href="../index.html#about">About</a>
+  </div>
+</nav>
+<a href="../index.html#artists" class="back-btn">&#8592; All Artists</a>
+<div class="hero">
+  <img src="../images/Patriot_McKee_Artist_Image.JPG" alt="Patriot McKee">
+  <div class="hero-gradient"></div>
+  <div class="hero-info">
+    <p>GLM Official Artist</p>
+    <h1>Patriot McKee</h1>
+  </div>
+</div>
+<div class="stream-bar">
+  <a href="https://open.spotify.com/artist/5NHj0q8jAY4thnaeCZ7Ogy?si=qUJ-1pq6S3SRm2BIfcmbPQ" target="_blank" class="stream-btn sp"><div class="sico">S</div>Spotify</a>
+  <a href="https://music.apple.com/us/artist/patriot-mckee/1205259303" target="_blank" class="stream-btn ap"><div class="sico">&#9835;</div>Apple Music</a>
+  <a href="https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" target="_blank" class="stream-btn am"><div class="sico">a</div>Amazon Music</a>
+</div>
+<div class="bio-section">
+  <p>Patriot McKee is a Christian rapper from Atlanta, Georgia. After releasing his first album at 14, Patriot found a love for music that brings people hope through encouragement and shared experiences, from sharing testimonies to sharing vibes. Patriot moves fluidly between styles, maintaining a straightforward and lyrical approach to lyrics and delivery while exploring where different sounds and flows suit his taste. Patriot knows that he is never a finished product, nor is his music, and he invites you to join him in the development and discovery of both.</p>
+</div>
+<section class="releases-section">
+  <div class="con">
+    <p class="sl">Discography</p>
+    <h2 class="st">Releases</h2>
+    <div class="rg">
+      <div class="rc">
+        <div class="rc-img-outer">
+          <div class="rc-img-wrap">
+            <img src="../images/Patriot_McKee_Work_Cover_Art.jpg" alt="Work">
+          </div>
+          <div class="stream-overlay">
+            <a href="https://open.spotify.com/album/5znK6ktnJu4PxC6riMN83Q" target="_blank" class="so-btn sp"><div class="so-ico">S</div>Spotify</a>
+            <a href="https://music.apple.com/us/album/work-single/1882067598" target="_blank" class="so-btn ap"><div class="so-ico">&#9835;</div>Apple Music</a>
+            <a href="https://music.amazon.com/artists/B06WGMFP58/patriot-mckee?marketplaceId=ATVPDKIKX0DER&musicTerritory=US" target="_blank" class="so-btn am"><div class="so-ico">a</div>Amazon Music</a>
+          </div>
+        </div>
+        <div class="ri"><div class="rt">Work</div><div class="rart">Patriot McKee · 2025</div><span class="rtag">Single</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="player-section">
+  <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/5NHj0q8jAY4thnaeCZ7Ogy?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+<footer>
+  <div class="ftitle">Good Life Music</div>
+  <div class="flinks">
+    <a href="../index.html#artists">Artists</a>
+    <a href="../index.html#releases">Releases</a>
+    <a href="../index.html#shows">Shows</a>
+    <a href="../index.html#about">About</a>
+    <a href="https://www.instagram.com/goodlifemusicllc/" target="_blank">Instagram</a>
+    <a href="../submit.html">Submit Your Music</a>
+  </div>
+  <div class="fcopy">&copy; 2026 Good Life Music LLC — Athens, GA. All rights reserved.</div>
+</footer>
+</body>
+</html>
