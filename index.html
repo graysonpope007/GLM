@@ -207,6 +207,15 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
       <button class="view-btn" onclick="window.location='artists/the-wraps.html'">View Artist</button>
     </div>
   </div>
+  <div class="slide" id="slide-4">
+    <img src="images/Guy_Mayer_Artist_Image.png" alt="Guy Mayer" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;"/>
+    <div class="slide-gradient"></div>
+    <div class="slide-name">
+      <h2>Guy Mayer</h2>
+      <p>GLM Official Artist</p>
+      <button class="view-btn" onclick="window.location='artists/guy-mayer.html'">View Artist</button>
+    </div>
+  </div>
   <div class="dots" id="dots"></div>
   <div class="arrows">
     <button class="arr" onclick="prevSlide()">&#8592;</button>
@@ -360,6 +369,12 @@ const releases = [
     apple:"https://music.apple.com/us/artist/sky-ciela/1888238134",
     amazon:"https://music.amazon.com/artists/B0GV1ZLGNR/sky-ciela?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
     artColor:"#0a1a2a" },
+  { title:"Passenger", artist:"Guy Mayer", tag:"Single", year:"2026",
+    coverImg: 'guy',
+    spotify:"https://open.spotify.com/artist/3NVkvhSvkFf7KXqElFXF01",
+    apple:"https://music.apple.com/us/artist/guy-mayer/1879571967",
+    amazon:"https://music.amazon.com/artists/B0GPRJLJDR/guy-mayer?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#1a1a2a" },
   { title:"I Bet", artist:"The Wraps", tag:"Album", year:"2025",
     coverImg: 'wraps',
     spotify:"https://open.spotify.com/artist/1gqHXkpFGreB4WWDk6VxSj?si=h4ANlsfaQ9iNBnwAZqIN7Q",
@@ -383,6 +398,8 @@ function buildReleases() {
             ? `<img src="images/Sky_Celia_Artist_Image.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">`
             : r.coverImg === 'wraps'
             ? `<img src="images/The_Wraps_I_Bet_Album_Art.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
+            : r.coverImg === 'guy'
+            ? `<img src="images/Guy_Mayer_Artist_Image.png" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
             : `<div class="rc-art-fallback" style="background:${r.artColor};">GLM</div>`}
         </div>
         <div class="stream-overlay">
