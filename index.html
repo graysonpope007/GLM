@@ -216,6 +216,15 @@ footer{background:#0f2e0f;padding:2.5rem 2rem;text-align:center;}
       <button class="view-btn" onclick="window.location='artists/guy-mayer.html'">View Artist</button>
     </div>
   </div>
+  <div class="slide" id="slide-5">
+    <img src="images/Raya_Ackleh_Artist_Image.jpg" alt="Raya Ackleh" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"/>
+    <div class="slide-gradient"></div>
+    <div class="slide-name">
+      <h2>Raya Ackleh</h2>
+      <p>GLM Official Artist</p>
+      <button class="view-btn" onclick="window.location='artists/raya-ackleh.html'">View Artist</button>
+    </div>
+  </div>
   <div class="dots" id="dots"></div>
   <div class="arrows">
     <button class="arr" onclick="prevSlide()">&#8592;</button>
@@ -378,7 +387,19 @@ const releases = [
     spotify:"https://open.spotify.com/artist/1gqHXkpFGreB4WWDk6VxSj?si=h4ANlsfaQ9iNBnwAZqIN7Q",
     apple:"https://music.apple.com/us/artist/the-wraps/1733126284",
     amazon:"https://music.amazon.com/artists/B0CWKPSTSG/the-wraps?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
-    artColor:"#1a1a2a" }
+    artColor:"#1a1a2a" },
+  { title:"3ARABIYE", artist:"Raya Ackleh", tag:"Single", year:"2026",
+    coverImg: 'raya3arabiye',
+    spotify:"https://open.spotify.com/track/0r2i33dwFtRkODhjI6ycbn?si=fedcaa07fc324e38",
+    apple:"https://music.apple.com/us/artist/raya-ackleh/1877938539",
+    amazon:"https://music.amazon.com/artists/B0GNTJ9L5Q/raya-ackleh?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#1a0a0a" },
+  { title:"Time of Day", artist:"Raya Ackleh", tag:"Single", year:"2026",
+    coverImg: 'rayatimeofday',
+    spotify:"https://open.spotify.com/track/71EhL8EhZc8EwQPmM7erbV?si=99f193c38a194606",
+    apple:"https://music.apple.com/us/artist/raya-ackleh/1877938539",
+    amazon:"https://music.amazon.com/artists/B0GNTJ9L5Q/raya-ackleh?marketplaceId=ATVPDKIKX0DER&musicTerritory=US",
+    artColor:"#1a1a0a" }
 ];
 
 // ── Build release cards with hover streaming links ───────────────────────────
@@ -398,6 +419,10 @@ function buildReleases() {
             ? `<img src="images/The_Wraps_I_Bet_Album_Art.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
             : r.coverImg === 'guy'
             ? `<img src="images/Guy_Mayer_Artist_Image.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
+            : r.coverImg === 'raya3arabiye'
+            ? `<img src="images/Raya_Ackleh_3ARABIYE_Cover.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
+            : r.coverImg === 'rayatimeofday'
+            ? `<img src="images/Raya_Ackleh_Time_Of_Day_Cover.jpg" alt="${r.title}" style="display:block;width:100%;height:100%;object-fit:cover;object-position:center top;"/>`
             : `<div class="rc-art-fallback" style="background:${r.artColor};">GLM</div>`}
         </div>
         <div class="stream-overlay">
@@ -415,7 +440,7 @@ function buildReleases() {
 }
 
 // ── Slideshow ────────────────────────────────────────────────────────────────
-let cur=0, total=5, timer, DURATION=5500;
+let cur=0, total=6, timer, DURATION=5500;
 function buildDots(){
   const d=document.getElementById('dots');
   for(let i=0;i<total;i++){
